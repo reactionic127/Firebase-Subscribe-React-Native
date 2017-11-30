@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, Dimensions } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Expo from 'expo';
@@ -7,12 +7,23 @@ import { NavigationActions } from 'react-navigation';
 import { ActionCreators } from '../redux/actions';
 import { getGameInfoRequest } from '../redux/actions/main';
 
+const {width, height} = Dimensions.get('window');
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
   },
+  scoreView: {
+    width: width - 20,
+    height: 100,
+    justifyContent: 'center',
+    marginLeft: 10
+  },
+  alignView: {
+    flexDirection: 'row'
+  },
+  leftView: {
+    width: 200
+  }
 });
 
 class Main extends React.Component {
@@ -26,14 +37,63 @@ class Main extends React.Component {
     this.props.getGameInfoRequest();
   }
 
-  render() {
-    console.log('gameData', this.props.gamesData);
+  renderScores() {
+    const {gamesData} = this.props;
     return (
-      <View style={styles.container}>
-        <Text>
-          aaa
-        </Text>
-      </View>
+      gamesData.map((value, index) => {
+        return (
+          <View key={index} style={styles.scoreView}>
+            <View style={styles.alignView}>
+              <View style={styles.leftView}>
+                <Text>
+                  HomeTotalScore:
+                </Text>
+              </View>
+              <Text>
+                {value.HomeTotalScore}
+              </Text>
+            </View>
+            <View style={styles.alignView}>
+              <View style={styles.leftView}>
+                <Text>
+                  AwayTotalScore:
+                </Text>
+              </View>
+              <Text>
+                {value.AwayTotalScore}
+              </Text>
+            </View>
+            <View style={styles.alignView}>
+              <View style={styles.leftView}>
+                <Text>
+                  ClockStatus:
+                </Text>
+              </View>
+              <Text>
+                {value.ClockStatus}
+              </Text>
+            </View>
+            <View style={styles.alignView}>
+              <View style={styles.leftView}>
+                <Text>
+                  ClockTime:
+                </Text>
+              </View>
+              <Text>
+                {value.ClockTime}
+              </Text>
+            </View>
+          </View>
+        );
+      })
+    );
+  }
+
+  render() {
+    return (
+      <ScrollView contentContainerStyle={styles.container}>
+        {this.renderScores()}
+      </ScrollView>
     );
   }
 }

@@ -16,7 +16,6 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
       };
     case GET_GAMEINFO_SUCCESS:
-      // console.log(action.data);
       return {
         ...state,
         gamesData: action.data
