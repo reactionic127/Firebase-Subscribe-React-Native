@@ -11,19 +11,23 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case GET_GAMEINFO_STARTED:
+    case GET_GAMEINFO_STARTED: {
       return {
         ...state,
       };
-    case GET_GAMEINFO_SUCCESS:
+    }
+    case GET_GAMEINFO_SUCCESS: {
+      const gameData = action.data;
       return {
         ...state,
-        gamesData: action.data
+        gamesData: gameData
       };
-    case GET_GAMEINFO_FAILURE:
+    }
+    case GET_GAMEINFO_FAILURE: {
       return {
         gamesData: []
       };
+    }
     default:
       return state;
   }

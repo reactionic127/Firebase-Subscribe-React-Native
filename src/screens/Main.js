@@ -93,6 +93,7 @@ class Main extends React.Component {
 
   renderScores() {
     const {gamesData} = this.props;
+    console.log('gamesdata', this.props.gamesData);
     return (
       gamesData.map((value, index) => {
         return (
@@ -175,11 +176,13 @@ class Main extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
+function mapStateToProps(state) {
+  console.log(state);
   return {
     gamesData: state.default.gamesData
+    //     objects: state.objectIds.map(id => state.objects[id])
   };
-};
+}
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(ActionCreators, dispatch);
