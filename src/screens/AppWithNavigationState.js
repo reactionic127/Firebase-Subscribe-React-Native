@@ -2,11 +2,11 @@ import { connect } from 'react-redux';
 import AppWithNav from './AppWithNav';
 
 const mapStateToProps = (state) => {
-  return {}
-}
+  return {};
+};
 
 const AppWithNavigationState = connect(
   mapStateToProps
-)(AppWithNav)
+)(AppWithNav);
 
-export default AppWithNavigationState
+export default AppWithNavigationState;

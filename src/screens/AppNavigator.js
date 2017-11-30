@@ -6,7 +6,7 @@ import {
   StackRouter
 } from 'react-navigation';
 
-import Main from './Main'
+import Main from './Main';
 
 const AppNavigator = StackNavigator({
   main: {
@@ -15,8 +15,6 @@ const AppNavigator = StackNavigator({
       title: 'Main Page',
     }),
   }
-},{
-  headerMode: 'none',
 });
 
 const MainNavigator = StackNavigator(
