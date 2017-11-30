@@ -32,17 +32,23 @@ export const getGameInfoRequest = () => (dispatch) => {
   ref.once('value').then((snap) => {
     snap.forEach(function (item) {
       const data = item.val();
-      if (data.Score !== undefined) {
-        const score = {
-          HomeTotalScore: data.Score.Home.P1 + data.Score.Home.P2 + data.Score.Home.P3 + data.Score.Home.OT + data.Score.Home.SO,
-          AwayTotalScore: data.Score.Away.P1 + data.Score.Away.P2 + data.Score.Away.P3 + data.Score.Away.OT + data.Score.Away.SO,
-          ClockStatus: data.Score.Clock.Status,
-          ClockTime: data.Score.Clock.Timer
-        };
-        keys.push(score);
-      }
+      const score = {
+        HomeTotalScore: data.homeScore,
+        AwayTotalScore: data.awayScore,
+      };
+      keys.push(score);
     });
     dispatch(getGameInfoSuccess(keys));
   });
+};
+
+export const addScoreRequest = (home, away) => (dispatch) => {
+  // dispatch(getGameInfoSuccess(keys));
+  const obj = {
+    homeScore: home,
+    awayScore: away
+  };
+  const ref = firebase.database().ref().child('games');
+  ref.push(obj);
 };
 
