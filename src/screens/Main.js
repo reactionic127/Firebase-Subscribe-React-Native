@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Expo from 'expo';
 import { NavigationActions } from 'react-navigation';
-import * as firebase from 'firebase';
 import { ActionCreators } from '../redux/actions';
+import { getGameInfoRequest } from '../redux/actions/main';
 
 const styles = StyleSheet.create({
   container: {
@@ -23,17 +23,11 @@ class Main extends React.Component {
   }
 
   componentDidMount() {
-    const keys = [];
-    const ref = firebase.database().ref().child('games').orderByChild('id');
-    ref.once('value', function (snap) {
-      snap.forEach(function (item) {
-        const itemVal = item.val();
-        keys.push(itemVal);
-      });
-    });
+    this.props.getGameInfoRequest();
   }
 
   render() {
+    console.log('gameData', this.props.gamesData);
     return (
       <View style={styles.container}>
         <Text>
@@ -44,12 +38,14 @@ class Main extends React.Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+    gamesData: state.default.gamesData
+  };
+};
+
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(ActionCreators, dispatch);
 }
 
-export default connect((state) => {
-  return {
-    goal: state.goal
-  };
-}, mapDispatchToProps)(Main);
+export default connect(mapStateToProps, mapDispatchToProps)(Main);
