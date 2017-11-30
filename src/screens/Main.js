@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, ScrollView, Dimensions } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, Dimensions, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Expo from 'expo';
@@ -23,6 +23,22 @@ const styles = StyleSheet.create({
   },
   leftView: {
     width: 200
+  },
+  buttonView: {
+    width,
+    height: 100,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  addData: {
+    width: 200,
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#369BE5'
+  },
+  addText: {
+    color: 'white'
   }
 });
 
@@ -92,6 +108,13 @@ class Main extends React.Component {
   render() {
     return (
       <ScrollView contentContainerStyle={styles.container}>
+        <View style={styles.buttonView}>
+          <TouchableOpacity style={styles.addData}>
+            <Text style={styles.addText}>
+              Add Data
+            </Text>
+          </TouchableOpacity>
+        </View>
         {this.renderScores()}
       </ScrollView>
     );

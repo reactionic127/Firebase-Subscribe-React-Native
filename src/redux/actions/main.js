@@ -28,7 +28,7 @@ export const getGameInfoFailure = (error) => {
 
 export const getGameInfoRequest = () => (dispatch) => {
   const keys = [];
-  const ref = firebase.database().ref().child('games').orderByChild('id');
+  const ref = firebase.database().ref().child('games');
   ref.once('value').then((snap) => {
     snap.forEach(function (item) {
       const data = item.val();
