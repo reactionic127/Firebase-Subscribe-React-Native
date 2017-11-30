@@ -6,4 +6,3 @@ const appReducer = combineReducers(Object.assign(
 ));
 
 export default appReducer;
-
